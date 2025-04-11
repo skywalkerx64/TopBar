@@ -1,28 +1,29 @@
 <script setup lang="ts">
 import MainLayout from '@/layouts/MainLayout.vue'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuLabel, DropdownMenuTrigger, DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Eye, MoreHorizontal, Pen, Trash } from 'lucide-vue-next'
 import type { Link } from '@/types'
 import { ref } from 'vue'
+import ScriptDialog from '@/components/Links/ScriptDialog.vue'
+import { getLinks } from '@/http/services/linkService'
+import EditLinkDialog from '@/components/Links/EditLinkDialog.vue'
 
-const links = ref<Link[]>([
-  {
-    id: 1,
-    message: '🌐 Ouvrez dans votre navigateur pour une meilleure expérience',
-    pageUrl: 'http://localhost',
-    gifUrl: 'https://data.textstudio.com/output/sample/animated/3/2/6/5/public-1-5623.gif',
-    data: {
-      backgroundColor: '#1E293B',
-      textColor: '#FFFFFF',
-    },
-  },
-])
+const links = ref<Link[]>([])
+
+const fetchLinks = async () => {
+  await getLinks()
+    .then((response) => {
+      links.value = response
+    })
+    .catch((error) => {
+      console.error('Error fetching links:', error)
+    })
+}
+const scriptTag = `<style src="https://cdn.jsdelivr.net/gh/skywalkerx64/CDN@latest/topbar.js" defer></style>`
+
+fetchLinks()
 </script>
-
 <template>
   <MainLayout>
     <div class="container mx-auto">
@@ -64,27 +65,17 @@ const links = ref<Link[]>([
                         <span class="text-xl"> #{{ link.id }}</span>
                       </TableCell>
                       <TableCell class="font-medium">
-                        {{ link.pageUrl }}
+                        <a :href="link.url" target="_blank" class="text-blue-500 hover:underline">
+                          {{ link.url }}
+                        </a>
                       </TableCell>
                       <TableCell class="font-medium"> <img class="max-w-32" :src="link.gifUrl" alt="GIF" /> </TableCell>
                       <TableCell class="font-medium">
                         {{ link.message }}
                       </TableCell>
-                      <TableCell class="flex">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger as-child>
-                            <Button aria-haspopup="true" size="icon" variant="ghost">
-                              <MoreHorizontal class="h-4 w-4" />
-                              <span class="sr-only">Toggle menu</span>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem> <Eye /> View </DropdownMenuItem>
-                            <DropdownMenuItem> <Pen /> Edit </DropdownMenuItem>
-                            <DropdownMenuItem> <Trash /> Delete </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
+                      <TableCell class="flex h-full items-center justify-center space-x-2">
+                        <ScriptDialog :script="scriptTag" />
+                        <EditLinkDialog :link="link" />
                       </TableCell>
                     </TableRow>
                   </TableBody>
