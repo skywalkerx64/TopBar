@@ -23,14 +23,14 @@ const routeList: RouteProps[] = [
     href: '/links',
     label: 'Links',
   },
-  {
-    href: '/about',
-    label: 'About',
-  },
-  {
-    href: '/contact',
-    label: 'Contact',
-  },
+  //  {
+  //    href: '/about',
+  //    label: 'About',
+  //  },
+  //  {
+  //    href: '/contact',
+  //    label: 'Contact',
+  //  },
 ]
 const isOpen = ref<boolean>(false)
 </script>
