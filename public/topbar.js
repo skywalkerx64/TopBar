@@ -3,7 +3,7 @@
   const isInAppBrowser = /FBAN|FBAV|Instagram|Telegram/i.test(userAgent)
   if (!isInAppBrowser) return
 
-  const apiBaseUrl = 'https://topbar.jeupix.com/api/links'
+  const apiBaseUrl = 'https://topbar.jeupix.com/api'
   const scriptTag = document.currentScript
   const urlParams = new URLSearchParams(scriptTag.src.split('?')[1])
   const configId = urlParams.get('id')
