@@ -7,7 +7,7 @@ import router from '@/router'
 import { ref } from 'vue'
 
 import { Menu } from 'lucide-vue-next'
-import ToggleTheme from '@/components/Utils/ToggleTheme.vue'
+// import ToggleTheme from '@/components/Utils/ToggleTheme.vue'
 
 interface RouteProps {
   href: string
@@ -73,7 +73,7 @@ const isOpen = ref<boolean>(false)
             <SheetFooter class="flex-col sm:flex-col justify-start items-start">
               <Separator class="mb-2" />
 
-              <ToggleTheme />
+              <!-- <ToggleTheme /> -->
             </SheetFooter>
           </SheetContent>
         </Sheet>
@@ -95,7 +95,7 @@ const isOpen = ref<boolean>(false)
       </NavigationMenu>
 
       <div class="hidden lg:flex justify-center items-center gap-2 text-base">
-        <ToggleTheme />
+        <!-- <ToggleTheme /> -->
       </div>
     </nav>
   </header>
