@@ -8,6 +8,7 @@ import { ref } from 'vue'
 import ScriptDialog from '@/components/Links/ScriptDialog.vue'
 import { getLinks } from '@/http/services/linkService'
 import EditLinkDialog from '@/components/Links/EditLinkDialog.vue'
+import LinkStatsDialog from '@/components/Links/LinkStatsDialog.vue'
 
 const links = ref<Link[]>([])
 
@@ -76,6 +77,7 @@ fetchLinks()
                       <TableCell class="flex h-full items-center justify-center space-x-2">
                         <ScriptDialog :script="scriptTag" />
                         <EditLinkDialog :link="link" />
+                        <LinkStatsDialog :link="link" />
                       </TableCell>
                     </TableRow>
                   </TableBody>

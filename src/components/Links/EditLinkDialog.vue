@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { updateLink } from '@/http/services/linkService'
 import type { Link } from '@/types'
+import { Pen } from 'lucide-vue-next'
 
 const open = ref(false)
 
@@ -29,7 +30,7 @@ async function submitChanges() {
 <template>
   <Dialog v-model:open="open">
     <DialogTrigger as-child>
-      <Button variant="outline">Edit Top Bar Details</Button>
+      <Button variant="outline"> <Pen /> Edit</Button>
     </DialogTrigger>
 
     <DialogContent class="max-w-xl">

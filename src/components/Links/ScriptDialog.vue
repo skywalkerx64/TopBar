@@ -3,7 +3,7 @@ import { ref, watch } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { toast } from 'vue-sonner'
-import { Copy, CopyCheck } from 'lucide-vue-next'
+import { Copy, CopyCheck, Eye } from 'lucide-vue-next'
 import hljs from 'highlight.js/lib/core'
 import html from 'highlight.js/lib/languages/xml'
 
@@ -48,7 +48,7 @@ watch(open, (val) => {
 <template>
   <Dialog v-model:open="open">
     <DialogTrigger as-child>
-      <Button variant="outline">Show Script</Button>
+      <Button variant="outline"> <Eye /> Show Script</Button>
     </DialogTrigger>
     <DialogContent class="max-w-3xl">
       <DialogHeader>
