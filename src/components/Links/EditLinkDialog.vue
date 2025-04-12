@@ -18,6 +18,7 @@ const form = ref({
   backgroundColor: props.link.backgroundColor,
   textColor: props.link.textColor,
   gifUrl: props.link.gifUrl,
+  url: props.link.url,
 })
 
 async function submitChanges() {
@@ -40,6 +41,10 @@ async function submitChanges() {
       </DialogHeader>
 
       <form class="grid gap-4 mt-4" @submit.prevent="submitChanges">
+        <div class="grid gap-2">
+          <label class="text-sm font-medium">URL</label>
+          <Input v-model="form.url" class="border border-input rounded px-3 py-2 text-sm" type="text" placeholder="Enter your link URL" required />
+        </div>
         <div class="grid gap-2">
           <label class="text-sm font-medium">Message</label>
           <Input v-model="form.message" class="border border-input rounded px-3 py-2 text-sm" type="text" placeholder="Enter your call-to-action" required />
