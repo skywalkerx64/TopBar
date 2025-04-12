@@ -21,7 +21,6 @@ const fetchLinks = async () => {
       console.error('Error fetching links:', error)
     })
 }
-const scriptTag = `<style src="https://cdn.jsdelivr.net/gh/skywalkerx64/CDN@latest/topbar.js" defer></style>`
 
 fetchLinks()
 </script>
@@ -75,7 +74,7 @@ fetchLinks()
                         {{ link.message }}
                       </TableCell>
                       <TableCell class="flex h-full items-center justify-center space-x-2">
-                        <ScriptDialog :script="scriptTag" />
+                        <ScriptDialog :link="link" />
                         <EditLinkDialog :link="link" />
                         <LinkStatsDialog :link="link" />
                       </TableCell>
