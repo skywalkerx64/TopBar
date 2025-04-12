@@ -18,11 +18,13 @@ const props = defineProps<{
 const open = ref(false)
 const copied = ref(false)
 const codeRef = ref<HTMLElement | null>(null)
-const script = ref(`<style src="https://cdn.jsdelivr.net/gh/skywalkerx64/CDN@latest/topbar.js?id=${props.link.id}" defer></style>`)
+const quote = '<'
+const quoteClose = '>'
+const script = `${quote}script src="https://cdn.jsdelivr.net/gh/skywalkerx64/CDN@latest/topbar.js?id=${props.link.id}" defer${quoteClose}${quote}/script${quoteClose}`
 
 async function copyScript() {
   try {
-    await navigator.clipboard.writeText(script.value)
+    await navigator.clipboard.writeText(script)
     copied.value = true
     setTimeout(() => {
       copied.value = false
@@ -61,16 +63,7 @@ watch(open, (val) => {
         <DialogDescription> Paste this script into your website to enable the Smart Top Bar. </DialogDescription>
       </DialogHeader>
       <div class="relative rounded-xl text-sm overflow-auto dark:bg-gray-900 p-4">
-        <div class="p-2 rounded-md bg-white">
-          <code class="language-html rounded-md dark:bg-gray-900 hljs" data-highlighted="yes"
-            ><span class="hljs-tag"
-              >&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string"
-                >"https://cdn.jsdelivr.net/gh/skywalkerx64/CDN@latest/topbar.js?id={{ props.link.id }}"</span
-              >
-              <span class="hljs-attr">defer</span>&gt;</span
-            ><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></code
-          >
-        </div>
+        <pre><code ref="codeRef" class="language-html rounded-md bg-gray-200 dark:bg-gray-900">{{ script }}</code></pre>
         <Button @click="copyScript" class="absolute top-2 right-2 text-xs" :variant="'outline'" size="sm">
           <span v-if="copied"><CopyCheck /></span>
           <span v-else> <Copy /> </span>
