@@ -42,11 +42,6 @@ watch(open, (val) => {
       if (codeRef.value) {
         hljs.highlightElement(codeRef.value)
       }
-      const codeBlock = document.getElementById('codeBlock')
-      const scriptTag = document.createElement('script')
-      scriptTag.src = 'https://cdn.jsdelivr.net/gh/skywalkerx64/CDN@latest/topbar.js?id=' + props.link.id
-      scriptTag.defer = true
-      codeBlock?.appendChild(scriptTag)
     }, 0)
   }
 })
