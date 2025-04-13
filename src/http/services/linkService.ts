@@ -15,7 +15,7 @@ export async function updateLink(id: number, data: { url?: string; message?: str
 
 export async function getStats(id: number) {
   const response = await api.get(`/links/${id}/stats`)
-  return response.data as { views: number; clicks: number; };
+  return response.data as { all: number, day: number, week: number, month: number };
 }
 
 export async function getTracks(id: number) {

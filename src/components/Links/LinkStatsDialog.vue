@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import type { Track, Link } from '@/types'
 import { ChartLine } from 'lucide-vue-next'
 import { getStats, getTracks } from '@/http/services/linkService'
@@ -14,8 +15,10 @@ const props = defineProps<{
 }>()
 
 const stats = ref({
-  views: 0,
-  clicks: 0,
+  all: 0,
+  day: 0,
+  week: 0,
+  month: 0,
 })
 
 const tracks = ref<Track[]>([])
@@ -46,7 +49,28 @@ fetchTracks()
         <DialogTitle>Link Stats</DialogTitle>
         <DialogDescription> View and analyze the performance of your link. </DialogDescription>
 
-        <h1 class="text-2xl font-medium">{{ stats.views }} Views | Clicks: {{ stats.clicks }}</h1>
+        <Tabs default-value="all">
+          <div class="flex items-center">
+            <TabsList>
+              <TabsTrigger value="day"> Today </TabsTrigger>
+              <TabsTrigger value="week"> Week </TabsTrigger>
+              <TabsTrigger value="month"> Month </TabsTrigger>
+              <TabsTrigger value="all"> All </TabsTrigger>
+            </TabsList>
+          </div>
+          <TabsContent value="all">
+            <h1 class="text-2xl font-medium">{{ stats.all }} Clicks</h1>
+          </TabsContent>
+          <TabsContent value="day">
+            <h1 class="text-2xl font-medium">{{ stats.day }} Clicks</h1>
+          </TabsContent>
+          <TabsContent value="week">
+            <h1 class="text-2xl font-medium">{{ stats.week }} Clicks</h1>
+          </TabsContent>
+          <TabsContent value="month">
+            <h1 class="text-2xl font-medium">{{ stats.month }} Clicks</h1>
+          </TabsContent>
+        </Tabs>
 
         <div class="mt-6">
           <Table>
