@@ -6,7 +6,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import type { Track, Link } from '@/types'
 import { ChartLine } from 'lucide-vue-next'
-import { getStats, getTracks } from '@/http/services/linkService'
+import { getStats, getTracks, getTracksPerPeriod } from '@/http/services/linkService'
 
 const open = ref(false)
 
@@ -22,6 +22,9 @@ const stats = ref({
 })
 
 const tracks = ref<Track[]>([])
+const todayTracks = ref<Track[]>([])
+const weekTracks = ref<Track[]>([])
+const monthTracks = ref<Track[]>([])
 
 const fetchStats = async () => {
   await getStats(props.link.id).then((response) => {
@@ -32,6 +35,15 @@ const fetchStats = async () => {
 const fetchTracks = async () => {
   await getTracks(props.link.id).then((response) => {
     tracks.value = response
+  })
+  await getTracksPerPeriod(props.link.id, 'day').then((response) => {
+    todayTracks.value = response
+  })
+  await getTracksPerPeriod(props.link.id, 'week').then((response) => {
+    weekTracks.value = response
+  })
+  await getTracksPerPeriod(props.link.id, 'month').then((response) => {
+    monthTracks.value = response
   })
 }
 fetchStats()
@@ -60,46 +72,105 @@ fetchTracks()
           </div>
           <TabsContent value="all">
             <h1 class="text-2xl font-medium">{{ stats.all }} Clicks</h1>
+            <div class="mt-6">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead class="hidden w-[100px] sm:table-cell">
+                      <span class="sr-only">id</span>
+                    </TableHead>
+                    <TableHead>IP address</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow v-for="track in tracks" :key="track.id">
+                    <TableCell class="hidden sm:table-cell">
+                      <span class="text-xl"> #{{ track.id }}</span>
+                    </TableCell>
+                    <TableCell class="font-medium">
+                      {{ track.ip }}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </TabsContent>
           <TabsContent value="day">
             <h1 class="text-2xl font-medium">{{ stats.day }} Clicks</h1>
+            <div class="mt-6">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead class="hidden w-[100px] sm:table-cell">
+                      <span class="sr-only">id</span>
+                    </TableHead>
+                    <TableHead>IP address</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow v-for="track in todayTracks" :key="track.id">
+                    <TableCell class="hidden sm:table-cell">
+                      <span class="text-xl"> #{{ track.id }}</span>
+                    </TableCell>
+                    <TableCell class="font-medium">
+                      {{ track.ip }}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </TabsContent>
           <TabsContent value="week">
             <h1 class="text-2xl font-medium">{{ stats.week }} Clicks</h1>
+            <div class="mt-6">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead class="hidden w-[100px] sm:table-cell">
+                      <span class="sr-only">id</span>
+                    </TableHead>
+                    <TableHead>IP address</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow v-for="track in weekTracks" :key="track.id">
+                    <TableCell class="hidden sm:table-cell">
+                      <span class="text-xl"> #{{ track.id }}</span>
+                    </TableCell>
+                    <TableCell class="font-medium">
+                      {{ track.ip }}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </TabsContent>
           <TabsContent value="month">
             <h1 class="text-2xl font-medium">{{ stats.month }} Clicks</h1>
+            <div class="mt-6">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead class="hidden w-[100px] sm:table-cell">
+                      <span class="sr-only">id</span>
+                    </TableHead>
+                    <TableHead>IP address</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow v-for="track in monthTracks" :key="track.id">
+                    <TableCell class="hidden sm:table-cell">
+                      <span class="text-xl"> #{{ track.id }}</span>
+                    </TableCell>
+                    <TableCell class="font-medium">
+                      {{ track.ip }}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
           </TabsContent>
         </Tabs>
-
-        <div class="mt-6">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead class="hidden w-[100px] sm:table-cell">
-                  <span class="sr-only">id</span>
-                </TableHead>
-                <TableHead>Page URL</TableHead>
-                <TableHead>IP address</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow v-for="track in tracks" :key="track.id">
-                <TableCell class="hidden sm:table-cell">
-                  <span class="text-xl"> #{{ track.id }}</span>
-                </TableCell>
-                <TableCell class="font-medium">
-                  <a :href="track.url" target="_blank" class="text-blue-500 hover:underline">
-                    {{ track.url }}
-                  </a>
-                </TableCell>
-                <TableCell class="font-medium">
-                  {{ track.ip }}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </div>
       </DialogHeader>
     </DialogContent>
   </Dialog>

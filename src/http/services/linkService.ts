@@ -23,3 +23,9 @@ export async function getTracks(id: number) {
   return response.data as Track[];
 
 }
+
+export async function getTracksPerPeriod(id: number, period?: 'all' | 'day' | 'week' | 'month') {
+  const response = await api.get(`/links/tracks/${id}/${period}`);
+  return response.data as Track[];
+
+}

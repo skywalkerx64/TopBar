@@ -36,7 +36,7 @@ const isOpen = ref<boolean>(false)
 </script>
 
 <template>
-  <header class="w-full bg-white dark:bg-black">
+  <header class="w-full bg-white">
     <nav
       :class="{
         'container mx-auto z-40 flex justify-between items-center py-2': true,

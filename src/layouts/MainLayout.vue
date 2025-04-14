@@ -4,7 +4,7 @@ import NavBar from '@/components/Navigation/NavBar.vue'
 </script>
 
 <template>
-  <body class="min-h-screen bg-white dark:bg-black flex flex-col">
+  <body class="min-h-screen bg-white flex flex-col">
     <NavBar class="sticky top-0 z-50" />
     <slot />
     <!-- <AppFooter /> -->
