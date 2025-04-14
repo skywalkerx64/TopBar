@@ -52,8 +52,8 @@ fetchLinks()
                         <span class="sr-only">id</span>
                       </TableHead>
                       <TableHead>Page URL</TableHead>
-                      <TableHead>GIF URL</TableHead>
-                      <TableHead>Message</TableHead>
+                      <!-- <TableHead>GIF URL</TableHead> -->
+                      <!-- <TableHead>Message</TableHead> -->
                       <TableHead>
                         <span>Actions</span>
                       </TableHead>
@@ -69,11 +69,11 @@ fetchLinks()
                           {{ link.url }}
                         </a>
                       </TableCell>
-                      <TableCell class="font-medium"> <img class="max-w-32" :src="link.gifUrl" alt="GIF" /> </TableCell>
-                      <TableCell class="font-medium">
+                      <!-- <TableCell class="font-medium"> <img class="max-w-32" :src="link.gifUrl" alt="GIF" /> </TableCell> -->
+                      <!-- <TableCell class="font-medium">
                         {{ link.message }}
-                      </TableCell>
-                      <TableCell class="flex h-full items-center justify-center space-x-2">
+                      </TableCell> -->
+                      <TableCell class="flex h-full items-center justify-start space-x-2">
                         <ScriptDialog :link="link" />
                         <EditLinkDialog :link="link" />
                         <LinkStatsDialog :link="link" />

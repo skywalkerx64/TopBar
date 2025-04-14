@@ -8,14 +8,14 @@ export async function getLinks() {
   return response.data as Link[]
 }
 
-export async function updateLink(id: number, data: { url?: string; message?: string; gifUrl?: string; backgroundColor?: string; textColor?: string; }) {
+export async function updateLink(id: number, data: { url?: string; messages: { data: { message: string | null, gifUrl: string | null }[] | null } | null; backgroundColor?: string; textColor?: string; }) {
   const response = await api.put(`/links/${id}`, data)
   return response.data as Link
 }
 
 export async function getStats(id: number) {
   const response = await api.get(`/links/${id}/stats`)
-  return response.data as { all: number, day: number, week: number, month: number };
+  return response.data as { all: { visits: number, clicks: number }, day: { visits: number, clicks: number }, week: { visits: number, clicks: number }, month: { visits: number, clicks: number } };
 }
 
 export async function getTracks(id: number) {

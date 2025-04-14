@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Dialog, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, DialogScrollContent } from '@/components/ui/dialog'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import type { Track, Link } from '@/types'
 import { ChartLine } from 'lucide-vue-next'
-import { getStats, getTracks, getTracksPerPeriod } from '@/http/services/linkService'
+import { getStats, getTracksPerPeriod } from '@/http/services/linkService'
 
 const open = ref(false)
 
@@ -15,10 +15,22 @@ const props = defineProps<{
 }>()
 
 const stats = ref({
-  all: 0,
-  day: 0,
-  week: 0,
-  month: 0,
+  all: {
+    visits: 0,
+    clicks: 0,
+  },
+  day: {
+    visits: 0,
+    clicks: 0,
+  },
+  week: {
+    visits: 0,
+    clicks: 0,
+  },
+  month: {
+    visits: 0,
+    clicks: 0,
+  },
 })
 
 const tracks = ref<Track[]>([])
@@ -33,7 +45,7 @@ const fetchStats = async () => {
 }
 
 const fetchTracks = async () => {
-  await getTracks(props.link.id).then((response) => {
+  await getTracksPerPeriod(props.link.id, 'all').then((response) => {
     tracks.value = response
   })
   await getTracksPerPeriod(props.link.id, 'day').then((response) => {
@@ -56,7 +68,7 @@ fetchTracks()
       <Button variant="outline"> <ChartLine /> Tracks</Button>
     </DialogTrigger>
 
-    <DialogContent class="max-w-3xl">
+    <DialogScrollContent class="max-w-3xl">
       <DialogHeader>
         <DialogTitle>Link Stats</DialogTitle>
         <DialogDescription> View and analyze the performance of your link. </DialogDescription>
@@ -71,7 +83,8 @@ fetchTracks()
             </TabsList>
           </div>
           <TabsContent value="all">
-            <h1 class="text-2xl font-medium">{{ stats.all }} Clicks</h1>
+            <h1 class="text-2xl font-medium">{{ stats.all.visits }} Visiteurs | {{ stats.all.clicks }} Clicks</h1>
+            <h1 class="text-2xl font-medium"></h1>
             <div class="mt-6">
               <Table>
                 <TableHeader>
@@ -96,7 +109,7 @@ fetchTracks()
             </div>
           </TabsContent>
           <TabsContent value="day">
-            <h1 class="text-2xl font-medium">{{ stats.day }} Clicks</h1>
+            <h1 class="text-2xl font-medium">{{ stats.day.visits }} Visiteurs | {{ stats.day.clicks }} Clicks</h1>
             <div class="mt-6">
               <Table>
                 <TableHeader>
@@ -121,7 +134,7 @@ fetchTracks()
             </div>
           </TabsContent>
           <TabsContent value="week">
-            <h1 class="text-2xl font-medium">{{ stats.week }} Clicks</h1>
+            <h1 class="text-2xl font-medium">{{ stats.week.visits }} Visiteurs | {{ stats.week.clicks }} Clicks</h1>
             <div class="mt-6">
               <Table>
                 <TableHeader>
@@ -146,7 +159,7 @@ fetchTracks()
             </div>
           </TabsContent>
           <TabsContent value="month">
-            <h1 class="text-2xl font-medium">{{ stats.month }} Clicks</h1>
+            <h1 class="text-2xl font-medium">{{ stats.month.visits }} Visiteurs | {{ stats.month.clicks }} Clicks</h1>
             <div class="mt-6">
               <Table>
                 <TableHeader>
@@ -172,6 +185,6 @@ fetchTracks()
           </TabsContent>
         </Tabs>
       </DialogHeader>
-    </DialogContent>
+    </DialogScrollContent>
   </Dialog>
 </template>

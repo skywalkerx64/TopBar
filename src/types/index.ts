@@ -1,7 +1,11 @@
 export type Link = {
   id: number
-  message: string
-  gifUrl: string
+  messages: {
+    data:
+    {
+      message: string | null, gifUrl: string | null,
+    }[] | null
+  } | null,
   url: string
   backgroundColor: string
   textColor: string
