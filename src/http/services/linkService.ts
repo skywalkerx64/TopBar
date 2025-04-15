@@ -8,7 +8,7 @@ export async function getLinks() {
   return response.data as Link[]
 }
 
-export async function updateLink(id: number, data: { url?: string; messages: { message: string | null, gifUrl: string | null, gif?: File | null }[] | null | null; backgroundColor?: string; textColor?: string; }) {
+export async function updateLink(id: number, data: { url?: string; messages: { data: { message: string | null, gifUrl: string | null, }[] | null } | null | null; backgroundColor?: string; textColor?: string; }) {
   const response = await api.put(`/links/${id}`, data, { headers: { 'Content-Type': 'multipart/form-data' } })
   return response.data as Link
 }
@@ -28,4 +28,10 @@ export async function getTracksPerPeriod(id: number, period?: 'all' | 'day' | 'w
   const response = await api.get(`/links/tracks/${id}/${period}`);
   return response.data as Track[];
 
+}
+
+export async function uploadGif(data: { media: File }) {
+  const response = await api.post('files/upload', data, { headers: { 'Content-Type': 'multipart/form-data' } })
+
+  return response.data as string
 }

@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Dialog, DialogScrollContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
-import { updateLink } from '@/http/services/linkService'
+import { updateLink, uploadGif } from '@/http/services/linkService'
 import type { Link } from '@/types'
 import { Pen, Trash } from 'lucide-vue-next'
 import { toast } from 'vue-sonner'
@@ -18,20 +18,15 @@ const form = ref({
   backgroundColor: props.link.backgroundColor,
   textColor: props.link.textColor,
   url: props.link.url,
-  messages:
-    props.link?.messages?.data.map((message) => ({
-      message: message.message,
-      gifUrl: message.gifUrl,
-      gif: null,
-    })) || [],
+  messages: props.link.messages,
 })
 
 function addMessage() {
-  form.value?.messages?.push({ message: '', gifUrl: '', gif: null })
+  form.value?.messages?.data?.push({ message: '', gifUrl: '' })
 }
 
 function removeMessage(index: number) {
-  form.value?.messages?.splice(index, 1)
+  form.value?.messages?.data?.splice(index, 1)
 }
 async function submitChanges() {
   await updateLink(props.link.id, form.value)
@@ -43,11 +38,16 @@ async function submitChanges() {
     })
 }
 
-function handleFileUpload(event: Event, index: number) {
+async function handleFileUpload(event: Event, index: number) {
   const target = event.target as HTMLInputElement
   const file = target.files?.[0]
   if (file) {
-    form.value.messages[index].gif = file
+    const fielUrl = await uploadGif({ media: file })
+    if (!fielUrl) {
+      toast.error('Error uploading GIF')
+      return
+    }
+    form.value.messages!.data![index].gifUrl = fielUrl
   }
 }
 
@@ -83,7 +83,7 @@ onMounted(() => {
           <Button type="button" class="w-fit" @click.prevent="addMessage">Ajouter un message</Button>
         </div>
 
-        <div v-for="(message, index) in form?.messages" :key="index" class="border p-4 rounded-xl space-y-2 mt-4 relative">
+        <div v-for="(message, index) in form?.messages?.data" :key="index" class="border p-4 rounded-xl space-y-2 mt-4 relative">
           <div>
             <label class="text-sm font-medium">Message</label>
             <Input v-model="message.message" placeholder="Texte du message" />
@@ -119,7 +119,7 @@ onMounted(() => {
             }"
           >
             <div class="flex transition-transform duration-500 ease-in-out" :style="{ transform: `translateX(-${currentSlide * 100}%)` }" ref="carouselRef">
-              <div v-for="(message, index) in form?.messages" :key="'preview-' + index" class="min-w-full flex items-center justify-center gap-2 px-4">
+              <div v-for="(message, index) in form?.messages?.data" :key="'preview-' + index" class="min-w-full flex items-center justify-center gap-2 px-4">
                 <span class="text-sm">{{ message.message }}</span>
                 <img v-if="message.gifUrl" :src="message.gifUrl" alt="" class="h-6 w-6 object-contain" />
               </div>
