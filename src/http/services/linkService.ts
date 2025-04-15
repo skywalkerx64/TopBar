@@ -8,8 +8,8 @@ export async function getLinks() {
   return response.data as Link[]
 }
 
-export async function updateLink(id: number, data: { url?: string; messages: { data: { message: string | null, gifUrl: string | null }[] | null } | null; backgroundColor?: string; textColor?: string; }) {
-  const response = await api.put(`/links/${id}`, data)
+export async function updateLink(id: number, data: { url?: string; messages: { message: string | null, gifUrl: string | null, gif?: File | null }[] | null | null; backgroundColor?: string; textColor?: string; }) {
+  const response = await api.put(`/links/${id}`, data, { headers: { 'Content-Type': 'multipart/form-data' } })
   return response.data as Link
 }
 

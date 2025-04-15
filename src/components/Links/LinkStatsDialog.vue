@@ -84,6 +84,7 @@ fetchTracks()
           </div>
           <TabsContent value="all">
             <h1 class="text-2xl font-medium">{{ stats.all.visits }} Visiteurs | {{ stats.all.clicks }} Clicks</h1>
+            <h1 class="text-2xl font-medium">Conversions : 0 euros</h1>
             <h1 class="text-2xl font-medium"></h1>
             <div class="mt-6">
               <Table>
@@ -110,6 +111,7 @@ fetchTracks()
           </TabsContent>
           <TabsContent value="day">
             <h1 class="text-2xl font-medium">{{ stats.day.visits }} Visiteurs | {{ stats.day.clicks }} Clicks</h1>
+            <h1 class="text-2xl font-medium">Conversions : 0 euros</h1>
             <div class="mt-6">
               <Table>
                 <TableHeader>
@@ -135,6 +137,7 @@ fetchTracks()
           </TabsContent>
           <TabsContent value="week">
             <h1 class="text-2xl font-medium">{{ stats.week.visits }} Visiteurs | {{ stats.week.clicks }} Clicks</h1>
+            <h1 class="text-2xl font-medium">Conversions : 0 euros</h1>
             <div class="mt-6">
               <Table>
                 <TableHeader>
@@ -160,6 +163,7 @@ fetchTracks()
           </TabsContent>
           <TabsContent value="month">
             <h1 class="text-2xl font-medium">{{ stats.month.visits }} Visiteurs | {{ stats.month.clicks }} Clicks</h1>
+            <h1 class="text-2xl font-medium">Conversions : 0 euros</h1>
             <div class="mt-6">
               <Table>
                 <TableHeader>
