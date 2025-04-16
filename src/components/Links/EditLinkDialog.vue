@@ -112,7 +112,7 @@ onMounted(() => {
         <div class="mt-6">
           <p class="text-sm font-semibold mb-2">Live preview:</p>
           <div
-            class="relative overflow-hidden rounded-xl border p-4"
+            class="relative overflow-hidden rounded-xl border"
             :style="{
               backgroundColor: form.backgroundColor,
               color: form.textColor,
@@ -121,7 +121,7 @@ onMounted(() => {
             <div class="flex transition-transform duration-500 ease-in-out" :style="{ transform: `translateX(-${currentSlide * 100}%)` }" ref="carouselRef">
               <div v-for="(message, index) in form?.messages?.data" :key="'preview-' + index" class="min-w-full flex items-center justify-center gap-2 px-4">
                 <span class="text-sm">{{ message.message }}</span>
-                <img v-if="message.gifUrl" :src="message.gifUrl" alt="" class="h-6 w-6 object-contain" />
+                <img v-if="message.gifUrl" :src="message.gifUrl" alt="" class="size-24 object-contain" />
               </div>
             </div>
           </div>
