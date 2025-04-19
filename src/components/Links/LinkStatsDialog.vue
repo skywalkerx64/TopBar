@@ -93,7 +93,7 @@ fetchTracks()
                     <TableHead class="hidden w-[100px] sm:table-cell">
                       <span class="sr-only">id</span>
                     </TableHead>
-                    <TableHead>IP address</TableHead>
+                    <!-- <TableHead>IP address</TableHead> -->
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -101,9 +101,9 @@ fetchTracks()
                     <TableCell class="hidden sm:table-cell">
                       <span class="text-xl"> #{{ track.id }}</span>
                     </TableCell>
-                    <TableCell class="font-medium">
+                    <!-- <TableCell class="font-medium">
                       {{ track.ip }}
-                    </TableCell>
+                    </TableCell> -->
                   </TableRow>
                 </TableBody>
               </Table>
@@ -119,7 +119,7 @@ fetchTracks()
                     <TableHead class="hidden w-[100px] sm:table-cell">
                       <span class="sr-only">id</span>
                     </TableHead>
-                    <TableHead>IP address</TableHead>
+                    <!-- <TableHead>IP address</TableHead> -->
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -127,9 +127,9 @@ fetchTracks()
                     <TableCell class="hidden sm:table-cell">
                       <span class="text-xl"> #{{ track.id }}</span>
                     </TableCell>
-                    <TableCell class="font-medium">
+                    <!-- <TableCell class="font-medium">
                       {{ track.ip }}
-                    </TableCell>
+                    </TableCell> -->
                   </TableRow>
                 </TableBody>
               </Table>
@@ -145,7 +145,7 @@ fetchTracks()
                     <TableHead class="hidden w-[100px] sm:table-cell">
                       <span class="sr-only">id</span>
                     </TableHead>
-                    <TableHead>IP address</TableHead>
+                    <!-- <TableHead>IP address</TableHead> -->
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -153,9 +153,9 @@ fetchTracks()
                     <TableCell class="hidden sm:table-cell">
                       <span class="text-xl"> #{{ track.id }}</span>
                     </TableCell>
-                    <TableCell class="font-medium">
+                    <!-- <TableCell class="font-medium">
                       {{ track.ip }}
-                    </TableCell>
+                    </TableCell> -->
                   </TableRow>
                 </TableBody>
               </Table>
@@ -171,7 +171,7 @@ fetchTracks()
                     <TableHead class="hidden w-[100px] sm:table-cell">
                       <span class="sr-only">id</span>
                     </TableHead>
-                    <TableHead>IP address</TableHead>
+                    <!-- <TableHead>IP address</TableHead> -->
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -179,9 +179,9 @@ fetchTracks()
                     <TableCell class="hidden sm:table-cell">
                       <span class="text-xl"> #{{ track.id }}</span>
                     </TableCell>
-                    <TableCell class="font-medium">
+                    <!-- <TableCell class="font-medium">
                       {{ track.ip }}
-                    </TableCell>
+                    </TableCell> -->
                   </TableRow>
                 </TableBody>
               </Table>
