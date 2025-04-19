@@ -20,7 +20,7 @@ const copied = ref(false)
 const codeRef = ref<HTMLElement | null>(null)
 const quote = '<'
 const quoteClose = '>'
-const script = `${quote}script src="https://cdn.jsdelivr.net/gh/skywalkerx64/CDN@latest/topbar-slider.js?id=${props.link.id}" defer${quoteClose}${quote}/script${quoteClose}`
+const script = `${quote}script src="https://cdn.jsdelivr.net/gh/skywalkerx64/CDN@latest/topbar-slider.js?id=${props.link.id}?v=1.0.3" defer${quoteClose}${quote}/script${quoteClose}`
 
 async function copyScript() {
   try {
